@@ -2,7 +2,7 @@
   "name": "logbot",
   "version": "0.1.0",
   "main": "build/server.js",
-  "repository": "git@github.com:timlindnet/chat-bot.git",
+  "repository": "git@github.com:timlindnet/logbot.git",
   "author": "timlindnet",
   "license": "MIT",
   "scripts": {
