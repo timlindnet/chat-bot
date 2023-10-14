@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "path": "example.txt",
+  "chats": [
+    {
+      "type": "ROCKET_CHAT",
+      "outputRooms": ["botspam"]
+    }
+  ],
+  "listeningRules": [
+    {
+      "rule": "Hello|world"
+    }
+  ]
+}

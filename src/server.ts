@@ -2,24 +2,24 @@ import { ChatEnum, ChatService, ChatTypeOutputRoomsMap } from './chat-service';
 import { FileListener, LogConfig } from './file-listener/FileListener';
 import dayjs from 'dayjs';
 import { aggregatedChatTypeOutputRooms } from './utils/aggregatedChatTypeOutputRooms';
+import fs from 'node:fs';
+import path from 'path';
 
-const logConfigs: LogConfig[] = [
-  {
-    name: 'example',
-    path: 'example.txt',
-    chats: [
-      {
-        type: ChatEnum.ROCKET_CHAT,
-        outputRooms: ['botspam'],
-      },
-    ],
-    listeningRules: [
-      {
-        rule: /Hello|world/,
-      },
-    ],
-  },
-];
+const getLogConfigs = (): LogConfig[] => {
+  const logConfigs: LogConfig[] = [];
+  const files = fs.readdirSync(path.resolve(__dirname, 'configs'));
+  files.forEach((file) => {
+    const logFile = fs.readFileSync(path.resolve(__dirname, 'configs', file), 'utf8');
+    logConfigs.push(JSON.parse(logFile));
+  });
+  return logConfigs;
+};
+
+const logConfigs = getLogConfigs();
+
+if (logConfigs?.length === 0) {
+  throw Error('No configs to load');
+}
 
 // Bot configuration
 const runbot = async () => {

@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "pm2": "NODE_ENV=production pm2 start ecosystem.config.js --env production",
-    "build": "tsc -p tsconfig.json",
+    "build": "yarn copyconfigs && tsc -p tsconfig.json",
+    "copyconfigs": "copyfiles -f src/configs/*.json build/configs",
     "start": "NODE_ENV=production node build/server.js",
     "lint": "eslint . --ext .ts"
   },
@@ -21,6 +22,7 @@
     "@types/node": "^20.8.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
+    "copyfiles": "^2.4.1",
     "dayjs": "^1.11.10",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",

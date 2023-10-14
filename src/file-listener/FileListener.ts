@@ -53,7 +53,7 @@ export class FileListener {
       const fileLines = fs
         .readFileSync(this.logConfig.path, 'utf8')
         .split('\n')
-        .filter((x) => x && this.logConfig.listeningRules?.some((y) => x.match(y.rule)));
+        .filter((x) => x && this.logConfig.listeningRules?.some((y) => x.match(new RegExp(y.rule))));
       const newFileLines = fileLines.slice(this.logConfig.currentLinePosition);
       this.logConfig.currentLinePosition = fileLines.length;
 
